@@ -6,8 +6,10 @@
   "scripts": {
     "lint": "eslint src test",
     "test:general": "mocha --compilers js:babel-register --reporter spec test/*.js",
+    "test:chai": "mocha --compilers js:babel-register --reporter spec test/chai/*.js",
     "test:expect": "mocha --compilers js:babel-register --reporter spec test/expect/*.js",
-    "test": "npm run test:general && npm run test:expect",
+    "test:should": "mocha --compilers js:babel-register --reporter spec test/should/*.js",
+    "test": "npm run test:general && npm run test:chai && npm run test:expect && npm run test:should",
     "prepublish": "rimraf lib && babel src --out-dir lib"
   },
   "repository": {

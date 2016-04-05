@@ -3,16 +3,7 @@ import assertions from '../assertions';
 
 function registerAssertions() {
   chai.use((_chai, utils) => {
-    _chai.Assertion.addProperty('with');
-
-    function withProperty() {
-      utils.flag(this, 'with', true);
-    }
-
     function stateMethod(stateValue) {
-      if (!utils.flag(this, 'with')) {
-        throw new Error('"state" should be used after "with"');
-      }
       utils.flag(this, 'state', stateValue);
     }
 
@@ -24,6 +15,7 @@ function registerAssertions() {
       if (!utils.flag(this, 'dispatch')) {
         throw new Error('"actions" should be used after "dispatch"');
       }
+
       const state = utils.flag(this, 'state');
       if (state) {
         assertions.toDispatchActionsWithState(state, this._obj, expectedActions, done);
@@ -43,7 +35,6 @@ function registerAssertions() {
         .to.dispatch.actions(expectedActions, done);
     }
 
-    _chai.Assertion.addProperty('with', withProperty);
     _chai.Assertion.addChainableMethod('state', stateMethod);
     _chai.Assertion.addProperty('dispatch', dispatchProperty);
     _chai.Assertion.addMethod('actions', dispatchActionsMethod);

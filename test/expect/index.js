@@ -8,28 +8,14 @@ registerMiddlewares([thunk]);
 registerAssertions();
 
 describe('expect', () => {
-  describe('with initial state', () => {
-    it('should accept object and setup getState', (done) => {
-      expect(actions.actionCreatorWithGetState())
-        .withState({ property: 'value' })
-        .toDispatchActions(actions.actionWithGetState({ property: 'value' }), done);
-    });
-
-    it('should accept function and setup getState', (done) => {
-      expect(actions.actionCreatorWithGetState())
-        .withState(() => { return { property: 'value' };})
-        .toDispatchActions(actions.actionWithGetState({ property: 'value' }), done);
-    });
-  });
-
   describe('.withState', () => {
-    it('should accept object and setup getState', (done) => {
+    it('should accept object', (done) => {
       expect(actions.actionCreatorWithGetState())
         .withState({ property: 'value' })
         .toDispatchActions(actions.actionWithGetState({ property: 'value' }), done);
     });
 
-    it('should accept function and setup getState', (done) => {
+    it('should accept function', (done) => {
       expect(actions.actionCreatorWithGetState())
         .withState(() => { return { property: 'value' };})
         .toDispatchActions(actions.actionWithGetState({ property: 'value' }), done);
