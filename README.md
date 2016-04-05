@@ -8,9 +8,9 @@ It use [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to m
 ## Supported Assertion Frameworks/Libraries:
 - [expect](https://github.com/mjackson/expect)
 - [chai](https://github.com/chaijs/chai)
-- [In Progress] [expect.js](https://github.com/Automattic/expect.js)
-- [In Progress] [should](https://github.com/shouldjs/should.js)
-- [In Progress] [jasmine](https://github.com/jasmine/jasmine) and [jest](https://github.com/facebook/jest)
+- [expect.js](https://github.com/Automattic/expect.js) [In Progress]
+- [should](https://github.com/shouldjs/should.js) [In Progress]
+- [jasmine](https://github.com/jasmine/jasmine) and [jest](https://github.com/facebook/jest) [In Progress]
 
 If you have not found assertion framework/library that you are using - you still can use [pure assertion function]().
 
@@ -158,7 +158,9 @@ registerAssertions();
 #### .to.dispatch.actions(assert.isDispatching)
 
 > `expect(action).to.dispatch.actions(expectedActions, callback)`
+
 > `action.should.dispatch.actions(expectedActions, callback)`
+
 > `assert.isDispatching(action, expectedActions, callback)`
 
 Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
@@ -180,7 +182,9 @@ assert.isDispatching(
 #### .with.state(assert.isDispatchingWithState)
 
 > `expect(action).with.state(state).to.dispatch.actions(expectedActions, callback)`
+
 > `action.should.with.state(state).dispatch.actions(expectedActions, callback)`
+
 > `assert.isDispatchingWithState(action, expectedActions, state, callback)`
 
 Asserts that store initialised with `state` before `action` is dispatched.
