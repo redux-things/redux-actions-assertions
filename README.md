@@ -1,9 +1,11 @@
-# redux-actions-assertions
+# redux-actions-assertions [![Build Status](https://travis-ci.org/dmitry-zaets/redux-actions-assertions.svg?branch=master)](https://travis-ci.org/dmitry-zaets/redux-actions-assertions)
 
 Assertions for redux actions testing
 
 This library add assertions for [redux actions](http://redux.js.org/docs/advanced/AsyncActions.html) testing.  
 It use [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to mock redux store.
+
+
 
 ## Supported Assertion Frameworks/Libraries:
 - [expect](#expect)
