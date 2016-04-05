@@ -1,0 +1,10 @@
+sudo: false
+language: node_js
+node_js:
+  - stable
+script:
+  - npm run test
+  - npm run prepublish
+branches:
+  only:
+    - master
