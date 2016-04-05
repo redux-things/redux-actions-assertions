@@ -6,13 +6,13 @@ This library add assertions for [redux actions](http://redux.js.org/docs/advance
 It use [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to mock redux store.
 
 ## Supported Assertion Frameworks/Libraries:
-- [expect](https://github.com/mjackson/expect)
-- [chai](https://github.com/chaijs/chai)
-- [expect.js](https://github.com/Automattic/expect.js) [In Progress]
-- [should](https://github.com/shouldjs/should.js) [In Progress]
-- [jasmine](https://github.com/jasmine/jasmine) and [jest](https://github.com/facebook/jest) [In Progress]
+- [expect](#expect)
+- [chai](#chai)
+- [expect.js](#expectjs) [In Progress]
+- [should](#should) [In Progress]
+- [jasmine and jest](#jasmine-and-jest) [In Progress]
 
-If you have not found assertion framework/library that you are using - you still can use [pure assertion function]().
+If you have not found assertion framework/library that you are using - you still can use [pure assertion function](#javascript).
 
 ## Installation
 
