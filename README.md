@@ -85,7 +85,7 @@ assertions.toDispatchActionsWithState(/**/);
 ### Usage
 
 #### toDispatchActions
-> `toDispatchActions(action, expectedActions, done)`
+> `toDispatchActions(action, expectedActions, callback)`
 
 Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
 
@@ -95,7 +95,7 @@ toDispatchActions(testActionCreator(), [{type: 'MY_ACTION_START'}], callback);
 
 #### toDispatchActionsWithState
 
-> `toDispatchActionsWithState(initialState, action, expectedActions, done)`
+> `toDispatchActionsWithState(initialState, action, expectedActions, callback)`
 
 Same as `toDispatchActions` + asserts that store initialised with `state` before `action` is dispatched.
 
@@ -119,7 +119,7 @@ registerAssertions();
 ```
 ### Usage
 
-#### toDispatchActions
+#### .toDispatchActions
 
 > `expect(action).toDispatchActions(expectedActions, callback)`
 
@@ -130,9 +130,9 @@ expect(myActionCreator())
   .toDispatchActions({type: 'MY_ACTION_START'}, callback);
 ```
 
-#### withState
+#### .withState
 
-> `expect(action).withState(state).toDispatchActions(expectedActions)`
+> `expect(action).withState(state).toDispatchActions(expectedActions, callback)`
 
 Asserts that store initialised with `state` before `action` is dispatched.
 
@@ -157,7 +157,7 @@ var registerAssertions = require('redux-actions-assertions/chai').registerAssert
 registerAssertions();
 ```
 
-#### .to.dispatch.actions(assert.isDispatching)
+#### .to.dispatch.actions or assert.isDispatching
 
 > `expect(action).to.dispatch.actions(expectedActions, callback)`
 
@@ -181,7 +181,7 @@ assert.isDispatching(
 );
 ```
 
-#### .with.state(assert.isDispatchingWithState)
+#### .with.state or assert.isDispatchingWithState
 
 > `expect(action).with.state(state).to.dispatch.actions(expectedActions, callback)`
 
@@ -235,6 +235,51 @@ var registerAssertions = require('redux-actions-assertions/should').registerAsse
 
 // registration
 registerAssertions();
+```
+
+### Usage
+
+#### .dispatchActions
+
+> `should(action).dispatchActions(expectedActions, callback)`
+> `action.should.dispatchActions(expectedActions, callback)`
+
+Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
+
+```js
+should(myActionCreator())
+  .dispatchActions({type: 'MY_ACTION_START'}, callback);
+
+myActionCreator().should
+  .dispatchActions({type: 'MY_ACTION_START'}, callback);
+```
+
+#### .withState or with.state
+
+> `should(action).withState(state).dispatchActions(expectedActions, callback)`
+> `should(action).with.state(state).dispatchActions(expectedActions, callback)`
+
+> `action.should.withState(state).dispatchActions(expectedActions, callback)`
+> `action.should.with.state(state).dispatchActions(expectedActions, callback)`
+
+Asserts that store initialised with `state` before `action` is dispatched.
+
+```js
+should(myActionCreator())
+  .withState({property: 'value'})
+  .dispatchActions({type: 'MY_ACTION_START'}, callback);
+
+should(myActionCreator())
+  .with.state({property: 'value'})
+  .dispatchActions({type: 'MY_ACTION_START'}, callback);
+
+myActionCreator().should
+  .withState({property: 'value'})
+  .dispatchActions({type: 'MY_ACTION_START'}, callback);
+
+myActionCreator().should
+  .with.state({property: 'value'})
+  .dispatchActions({type: 'MY_ACTION_START'}, callback);
 ```
 ## [jasmine](https://github.com/jasmine/jasmine) and [jest](https://github.com/facebook/jest)
 
