@@ -29,7 +29,7 @@ describe('should', () => {
 
     it('should have alias .state', (done) => {
       should(actions.actionCreatorWithGetState())
-        .with.state(() => { return { property: 'value1' };})
+        .with.state(() => { return { property: 'value' };})
         .dispatchActions(actions.actionWithGetState({ property: 'value' }), done);
     });
   });

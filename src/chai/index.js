@@ -18,10 +18,9 @@ function registerAssertions() {
 
       const state = utils.flag(this, 'state');
       if (state) {
-        assertions.toDispatchActionsWithState(state, this._obj, expectedActions, done);
-      } else {
-        assertions.toDispatchActions(this._obj, expectedActions, done);
+        return assertions.toDispatchActionsWithState(state, this._obj, expectedActions, done);
       }
+      return assertions.toDispatchActions(this._obj, expectedActions, done);
     }
 
     function isDispatchingWithState(actualAction, expectedActions, state, done) {

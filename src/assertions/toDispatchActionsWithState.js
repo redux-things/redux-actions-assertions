@@ -53,6 +53,7 @@ function toDispatchActionsWithState(initialState, actionUnderTest, expectedActio
         if (!find(dispatchedActions, expectedUnrolledActions[index])) {
           throw new Error(
             `Expected action ${JSON.stringify(expectedUnrolledActions[index])} was not dispatched.`
+            + `\nActual dispatched actions: ${JSON.stringify(dispatchedActions)}`
           );
         }
       }

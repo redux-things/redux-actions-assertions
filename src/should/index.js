@@ -15,8 +15,9 @@ function dispatchActions(expectedActions, done) {
     const action = this.obj.action;
     const state = this.obj.state;
     assertions.toDispatchActionsWithState(state, action, expectedActions, done);
+  } else {
+    assertions.toDispatchActions(this.obj, expectedActions, done);
   }
-  assertions.toDispatchActions(this.obj, expectedActions, done);
 }
 
 function registerAssertions() {
