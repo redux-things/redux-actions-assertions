@@ -8,8 +8,9 @@
     "test:general": "mocha --compilers js:babel-register --reporter spec test/*.js",
     "test:chai": "mocha --compilers js:babel-register --reporter spec test/chai/*.js",
     "test:expect": "mocha --compilers js:babel-register --reporter spec test/expect/*.js",
+    "test:expectjs": "mocha --compilers js:babel-register --reporter spec test/expect.js/*.js",
     "test:should": "mocha --compilers js:babel-register --reporter spec test/should/*.js",
-    "test": "npm run test:general && npm run test:chai && npm run test:expect && npm run test:should",
+    "test": "npm run test:general && npm run test:chai && npm run test:expect && npm run test:expectjs && npm run test:should",
     "prepublish": "rimraf lib && babel src --out-dir lib"
   },
   "repository": {

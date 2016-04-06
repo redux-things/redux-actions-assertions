@@ -10,8 +10,8 @@ It use [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to m
 ## Supported Assertion Frameworks/Libraries:
 - [expect](#expect)
 - [chai](#chai)
-- [expect.js](#expectjs) [In Progress]
-- [should](#should) [In Progress]
+- [expect.js](#expectjs)
+- [should](#should)
 - [jasmine and jest](#jasmine-and-jest) [In Progress]
 
 If you have not found assertion framework/library that you are using - you still can use [pure assertion function](#javascript).
@@ -220,6 +220,31 @@ var registerAssertions = require('redux-actions-assertions/expect.js').registerA
 
 // registration
 registerAssertions();
+```
+
+### Usage
+
+#### .dispatchActions
+
+> `expect(action).to.dispatchActions(expectedActions, callback)`
+
+Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
+
+```js
+expect(myActionCreator())
+  .to.dispatchActions({type: 'MY_ACTION_START'}, callback);
+```
+
+#### .withState
+
+> `expect(action).withState(state).to.dispatchActions(expectedActions, callback)`
+
+Asserts that store initialised with `state` before `action` is dispatched.
+
+```js
+expect(myActionCreator())
+  .withState({property: 'value'})
+  .to.dispatchActions([{type: 'MY_ACTION_START'}, finishActionCreator()], callback);
 ```
 
 ## [should](https://github.com/shouldjs/should.js)
