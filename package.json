@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint src test",
-    "test:general": "mocha --compilers js:babel-register --reporter spec test/*.js",
+    "test:general": "mocha --compilers js:babel-register --reporter spec test/general/*.js test/assertions/*.js",
     "test:chai": "mocha --compilers js:babel-register --reporter spec test/chai/*.js",
     "test:expect": "mocha --compilers js:babel-register --reporter spec test/expect/*.js",
     "test:expectjs": "mocha --compilers js:babel-register --reporter spec test/expect.js/*.js",
@@ -36,7 +36,6 @@
     "eslint-plugin-babel": "^3.1.0",
     "expect": "^1.16.0",
     "expect.js": "^0.3.1",
-    "jasmine": "^2.4.1",
     "mocha": "^2.4.5",
     "redux-thunk": "^2.0.1",
     "rimraf": "^2.5.2",

@@ -1,7 +1,7 @@
 import expect from 'expect';
 import thunk from 'redux-thunk';
-import getMockStore, { registerMiddlewares } from '../src/mockStore';
-import actions from './testingData/actions';
+import getMockStore, { registerMiddlewares } from '../../src/mockStore';
+import actions from '../testingData/actions';
 
 registerMiddlewares([thunk]);
 

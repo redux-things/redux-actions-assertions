@@ -1,20 +1,19 @@
-# redux-actions-assertions [![Build Status](https://travis-ci.org/dmitry-zaets/redux-actions-assertions.svg?branch=master)](https://travis-ci.org/dmitry-zaets/redux-actions-assertions)
-
+# redux-actions-assertions 
 Assertions for redux actions testing
 
 This library add assertions for [redux actions](http://redux.js.org/docs/advanced/AsyncActions.html) testing.  
 It use [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to mock redux store.
 
-
+[![build status](https://img.shields.io/travis/dmitry-zaets/redux-actions-assertions/master.svg?style=flat-square)](https://travis-ci.org/dmitry-zaets/redux-actions-assertions)
+[![npm version](https://img.shields.io/npm/v/redux-actions-assertions.svg?style=flat-square)](https://www.npmjs.com/package/redux-actions-assertions)
 
 ## Supported Assertion Frameworks/Libraries:
-- [expect](#expect)
 - [chai](#chai)
+- [expect](#expect)
 - [expect.js](#expectjs)
 - [should](#should)
-- [jasmine and jest](#jasmine-and-jest) [In Progress]
 
-If you have not found assertion framework/library that you are using - you still can use [pure assertion function](#javascript).
+If you have not found assertion framework/library that you are using - you can use [pure javascript assertion](#javascript) or create an issue.
 
 ## Installation
 
@@ -103,45 +102,6 @@ Same as `toDispatchActions` + asserts that store initialised with `state` before
 toDispatchActions({property: 'value'}, testActionCreator(), [{type: 'MY_ACTION_START'}], callback);
 ```
 
-## [expect](https://github.com/mjackson/expect)
-
-### Registration
-
-```js
-// using ES6 modules
-import { registerAssertions } from 'redux-actions-assertions/expect';
-
-// using CommonJS modules
-var registerAssertions = require('redux-actions-assertions/expect').registerAssertions;
-
-// registration
-registerAssertions();
-```
-### Usage
-
-#### .toDispatchActions
-
-> `expect(action).toDispatchActions(expectedActions, callback)`
-
-Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
-
-```js
-expect(myActionCreator())
-  .toDispatchActions({type: 'MY_ACTION_START'}, callback);
-```
-
-#### .withState
-
-> `expect(action).withState(state).toDispatchActions(expectedActions, callback)`
-
-Asserts that store initialised with `state` before `action` is dispatched.
-
-```js
-expect(myActionCreator())
-  .withState({property: 'value'})
-  .toDispatchActions([{type: 'MY_ACTION_START'}, finishActionCreator()], callback);
-```
-
 ## [chai](https://github.com/chaijs/chai)
 
 ### Registration
@@ -205,6 +165,45 @@ assert.isDispatchingWithState(
   { property: 'value' }
   callback
 );
+```
+
+## [expect](https://github.com/mjackson/expect)
+
+### Registration
+
+```js
+// using ES6 modules
+import { registerAssertions } from 'redux-actions-assertions/expect';
+
+// using CommonJS modules
+var registerAssertions = require('redux-actions-assertions/expect').registerAssertions;
+
+// registration
+registerAssertions();
+```
+### Usage
+
+#### .toDispatchActions
+
+> `expect(action).toDispatchActions(expectedActions, callback)`
+
+Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
+
+```js
+expect(myActionCreator())
+  .toDispatchActions({type: 'MY_ACTION_START'}, callback);
+```
+
+#### .withState
+
+> `expect(action).withState(state).toDispatchActions(expectedActions, callback)`
+
+Asserts that store initialised with `state` before `action` is dispatched.
+
+```js
+expect(myActionCreator())
+  .withState({property: 'value'})
+  .toDispatchActions([{type: 'MY_ACTION_START'}, finishActionCreator()], callback);
 ```
 
 ## [expect.js](https://github.com/Automattic/expect.js)
@@ -305,18 +304,4 @@ myActionCreator().should
 myActionCreator().should
   .with.state({property: 'value'})
   .dispatchActions({type: 'MY_ACTION_START'}, callback);
-```
-## [jasmine](https://github.com/jasmine/jasmine) and [jest](https://github.com/facebook/jest)
-
-### Registration
-
-```js
-// using ES6 modules
-import { registerAssertions } from 'redux-actions-assertions/jasmine';
-
-// using CommonJS modules
-var registerAssertions = require('redux-actions-assertions/jasmine').registerAssertions;
-
-// registration
-registerAssertions();
 ```

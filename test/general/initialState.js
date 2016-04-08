@@ -2,8 +2,8 @@ import expect from 'expect';
 import getInitialStoreState, {
   buildInitialStoreState,
   registerInitialStoreState
-} from '../src/initialState';
-import { expectedInitialState, reducerWithNesterReducers } from './testingData/reducers';
+} from '../../src/initialState';
+import { expectedInitialState, reducerWithNesterReducers } from '../testingData/reducers';
 
 describe('initialState', () => {
   describe('getInitialStoreState', () => {
