@@ -1,6 +1,6 @@
 {
   "name": "redux-actions-assertions",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Assertions for redux actions testing",
   "main": "lib/index.js",
   "scripts": {
