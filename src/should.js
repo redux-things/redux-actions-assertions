@@ -1,6 +1,6 @@
 import should from 'should';
-import assertions from '../assertions';
-import ActionWithInitialState from '../actionWithInitialState';
+import assertions from './assertions';
+import ActionWithInitialState from './actionWithInitialState';
 
 function withState(state) {
   this.obj = new ActionWithInitialState(this.obj, state);

@@ -1,6 +1,6 @@
 import expect from 'expect';
-import { toDispatchActions } from '../../src/assertions/toDispatchActions';
-import * as assertions from '../../src/assertions/toDispatchActionsWithState';
+import { toDispatchActions } from '../../src/asserts/toDispatchActions';
+import * as assertions from '../../src/asserts/toDispatchActionsWithState';
 import getInitialStoreState from '../../src/initialState';
 
 describe('assertions', () => {

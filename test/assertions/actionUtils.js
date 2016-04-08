@@ -3,7 +3,7 @@ import {
   getDispatchedActions,
   unrollActions,
   assertDispatchedActions
-} from '../../src/assertions/actionUtils';
+} from '../../src/asserts/actionUtils';
 
 describe('assertions', () => {
   describe('action utils', () => {

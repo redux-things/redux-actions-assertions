@@ -1,7 +1,7 @@
 import expect from 'expect.js';
 import thunk from 'redux-thunk';
 import { registerMiddlewares } from '../../src';
-import { registerAssertions } from '../../src/expect.js';
+import { registerAssertions } from '../../src/expectjs';
 import actions from '../testingData/actions';
 
 registerMiddlewares([thunk]);

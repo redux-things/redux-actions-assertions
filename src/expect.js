@@ -1,5 +1,5 @@
 import expect from 'expect';
-import assertions from '../assertions';
+import assertions from './assertions';
 
 function withState(state) {
   this.state = state;

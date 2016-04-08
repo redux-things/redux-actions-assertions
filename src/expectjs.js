@@ -1,6 +1,6 @@
 import expect from 'expect.js';
-import assertions from '../assertions';
-import ActionWithInitialState from '../actionWithInitialState';
+import assertions from './assertions';
+import ActionWithInitialState from './actionWithInitialState';
 
 function withState(state) {
   return expect(new ActionWithInitialState(this.obj, state));

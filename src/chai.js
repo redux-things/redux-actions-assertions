@@ -1,5 +1,5 @@
 import chai from 'chai';
-import assertions from '../assertions';
+import assertions from './assertions';
 
 function registerAssertions() {
   chai.use((_chai, utils) => {
