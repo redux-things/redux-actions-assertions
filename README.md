@@ -74,7 +74,7 @@ For plain javasript assertions you dont need to register anything. Just import a
 import assertions from 'redux-actions-assertions/assertions';
 
 // using CommonJS modules
-var assertions = require('redux-actions-assertions/expect').assertions;
+var assertions = require('redux-actions-assertions/assertions');
 
 // in test
 assertions.toDispatchActions(/**/)
