@@ -19,7 +19,7 @@ If you have not found assertion framework/library that you are using - you can u
 
 Using [npm](https://www.npmjs.org/):
 
-    $ npm install --save expect-redux-actions
+    $ npm install --save redux-actions-assertions
 
 ## Register redux middlewares
 
