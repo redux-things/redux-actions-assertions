@@ -1,6 +1,6 @@
 {
   "name": "redux-actions-assertions",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Assertions for redux actions testing",
   "scripts": {
   },
@@ -17,6 +17,14 @@
     "url": "https://github.com/dmitry-zaets/redux-actions-assertions/issues"
   },
   "homepage": "https://github.com/dmitry-zaets/redux-actions-assertions#readme",
+  "keywords": [
+    "redux",
+    "actions",
+    "testing",
+    "test",
+    "assertions",
+    "asserts"
+  ],
   "dependencies": {
     "lodash.find": "^4.3.0",
     "lodash.flattendeep": "^4.1.1",

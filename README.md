@@ -1,11 +1,16 @@
 # redux-actions-assertions 
-Assertions for redux actions testing
+Assertions for redux actions testing.
 
-This library add assertions for [redux actions](http://redux.js.org/docs/advanced/AsyncActions.html) testing.  
+This library adds assertions for [redux actions](http://redux.js.org/docs/advanced/AsyncActions.html) testing.  
 It use [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to mock redux store.
 
 [![build status](https://img.shields.io/travis/dmitry-zaets/redux-actions-assertions/master.svg?style=flat-square)](https://travis-ci.org/dmitry-zaets/redux-actions-assertions)
 [![npm version](https://img.shields.io/npm/v/redux-actions-assertions.svg?style=flat-square)](https://www.npmjs.com/package/redux-actions-assertions)
+
+## What it does:
+- [Simplifies initial setup](#simplifies-initial-setup);
+- [Reduces repetitive code of test methods](#reduces-repetitive-code-of-test-methods);
+- [Allows to avoid re-testing nested action creators](#allows-to-avoid-re-testing-nested-action-creators);
 
 ## Supported Assertion Frameworks/Libraries:
 - [chai](#chai)
@@ -15,13 +20,118 @@ It use [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to m
 
 If you have not found assertion framework/library that you are using - you can use [pure javascript assertion](#javascript) or create an issue.
 
+### Simplifies initial setup
+It provides singe-time global configuration for middlewares and initial store state.
+
+Without:
+```javascript
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+const store = mockStore({ /*initial store object*});
+```
+With:
+```javascript
+registerMiddlewares([ thunk ]);
+// to set custom initial state 
+registerInitialStoreState(/*object of function*/);
+// to generate initial state of your application
+registerInitialStoreState(buildInitialStoreState(/*your root reducer*/));
+```
+
+### Reduces repetitive code of test methods
+It reduces boilerplate of test methods and makes testing fluent.
+
+Without:
+```javascript
+const store = mockStore(/* initial state */);
+const expectedActions = [
+  { type: types.FETCH_TODOS_REQUEST },
+  /* All expected triggered action objects */
+];
+store.dispatch(fetchData()).then(() => {
+  const actions = store.getActions();
+  expect(actions).toEqual(expectedActions);
+}).then(done).catch(done);
+```
+
+With:
+```javascript
+const expectedActions = [
+  /*All expected triggered action objects or action creator functions*/
+];
+expect(fetchData()).toDispatchActions(expectedActions, done);
+```
+
+With using customised store state:
+```javascript
+expect(fetchData()).withState({/*custom state*/}).toDispatchActions(expectedActions, done);
+```
+
+### Allows to avoid re-testing nested action creators
+It allows to test only actions that needs to be tested.
+
+**Example:**  
+We have two actions (A, B). Each one makes async http requests.  
+Action A makes request and if result is successful it triggers Action B.  
+Action B is also used as independent action.  
+Action B can be tested separately.  
+We don't need to test it again in Action A.  
+
+Actions:
+```javascript
+function actionA() {
+  return dispatch => {
+    dispatch(actionAStart());
+    return api.getA().then(response => {
+        dispatch(actionAFinish(response));
+        dispatch(actionB());
+      }).catch(err => {
+        dispatch(actionAFailure(err));
+      });
+    };
+}
+
+function actionB() {
+  return dispatch => {
+    dispatch(actionBStart());
+    return api.getB().then(response => {
+        dispatch(actionBFinish(response));
+      }).catch(err => {
+        dispatch(actionBFailure(err));
+      });
+    };
+}
+```
+
+Without:
+```javascript
+const expectedActions = [
+  { type: action_a_start },
+  { type: action_a_success },   
+  { type: action_b_start }, // retesting of action B
+  { type: action_b_success } // retesting of action B];
+const store = mockStore({ todos: [] });
+store.dispatch(actionA()).then(() => {
+  expect(store.getActions()).toEqual(expectedActions);
+}).then(done).catch(done);
+```
+
+With:
+```javascript
+expect(actionA()).withState({ todos: [] }).toDispatch([
+  { type: action_a_start },
+  { type: action_a_success },
+  actionB() // just executing tested action
+], done);
+```
+
 ## Installation
 
 Using [npm](https://www.npmjs.org/):
 
     $ npm install --save redux-actions-assertions
 
-## Register redux middlewares
+### Redux middlewares registration
 
 ```js
 // using ES6 modules
@@ -36,7 +146,7 @@ registerMiddlewares([
 ]);
 ```
 
-## Register default initial store state
+### Default initial store state registration
 
 **By using state object or function:**
 ```js
@@ -88,7 +198,7 @@ assertions.toDispatchActionsWithState(/**/);
 Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
 
 ```js
-toDispatchActions(testActionCreator(), [{type: 'MY_ACTION_START'}], callback);
+toDispatchActions(testActionCreator(), [{ type: 'MY_ACTION_START' }], callback);
 ```
 
 #### toDispatchActionsWithState
@@ -98,7 +208,7 @@ toDispatchActions(testActionCreator(), [{type: 'MY_ACTION_START'}], callback);
 Same as `toDispatchActions` + asserts that store initialised with `state` before `action` is dispatched.
 
 ```js
-toDispatchActions({property: 'value'}, testActionCreator(), [{type: 'MY_ACTION_START'}], callback);
+toDispatchActions({property: 'value'}, testActionCreator(), [{ type: 'MY_ACTION_START' }], callback);
 ```
 
 ## [chai](https://github.com/chaijs/chai)
@@ -128,14 +238,14 @@ Asserts that when given `action` is dispatched it will dispatch `expectedActions
 
 ```js
 expect(myActionCreator())
-  .to.dispatch.actions({type: 'MY_ACTION_START'}, callback);
+  .to.dispatch.actions({ type: 'MY_ACTION_START' }, callback);
 
 myActionCreator()
-  .should.dispatch.actions({type: 'MY_ACTION_START'}, callback);
+  .should.dispatch.actions({ type: 'MY_ACTION_START' }, callback);
 
 assert.isDispatching(
   myActionCreator(),
-  {type: 'MY_ACTION_START'},
+  { type: 'MY_ACTION_START' },
   callback
 );
 ```
@@ -152,15 +262,15 @@ Asserts that store initialised with `state` before `action` is dispatched.
 ```js
 expect(myActionCreator())
   .with.state({ property: 'value' })
-  .to.dispatch.actions([{type: 'MY_ACTION_START'}, finishActionCreator()], callback);
+  .to.dispatch.actions([{ type: 'MY_ACTION_START' }, finishActionCreator()], callback);
 
 myActionCreator()
   .should.with.({ property: 'value' })
-  .dispatch.actions([{type: 'MY_ACTION_START'}, finishActionCreator()], callback);
+  .dispatch.actions([{ type: 'MY_ACTION_START' }, finishActionCreator()], callback);
 
 assert.isDispatchingWithState(
   myActionCreator(),
-  [{type: 'MY_ACTION_START'}, finishActionCreator()],
+  [{ type: 'MY_ACTION_START' }, finishActionCreator()],
   { property: 'value' }
   callback
 );
@@ -190,7 +300,7 @@ Asserts that when given `action` is dispatched it will dispatch `expectedActions
 
 ```js
 expect(myActionCreator())
-  .toDispatchActions({type: 'MY_ACTION_START'}, callback);
+  .toDispatchActions({ type: 'MY_ACTION_START' }, callback);
 ```
 
 #### .withState
@@ -202,7 +312,7 @@ Asserts that store initialised with `state` before `action` is dispatched.
 ```js
 expect(myActionCreator())
   .withState({property: 'value'})
-  .toDispatchActions([{type: 'MY_ACTION_START'}, finishActionCreator()], callback);
+  .toDispatchActions([{ type: 'MY_ACTION_START' }, finishActionCreator()], callback);
 ```
 
 ## [expect.js](https://github.com/Automattic/expect.js)
@@ -230,7 +340,7 @@ Asserts that when given `action` is dispatched it will dispatch `expectedActions
 
 ```js
 expect(myActionCreator())
-  .to.dispatchActions({type: 'MY_ACTION_START'}, callback);
+  .to.dispatchActions({ type: 'MY_ACTION_START' }, callback);
 ```
 
 #### .withState
@@ -241,8 +351,8 @@ Asserts that store initialised with `state` before `action` is dispatched.
 
 ```js
 expect(myActionCreator())
-  .withState({property: 'value'})
-  .to.dispatchActions([{type: 'MY_ACTION_START'}, finishActionCreator()], callback);
+  .withState({ property: 'value' })
+  .to.dispatchActions([{ type: 'MY_ACTION_START' }, finishActionCreator()], callback);
 ```
 
 ## [should](https://github.com/shouldjs/should.js)
@@ -271,10 +381,10 @@ Asserts that when given `action` is dispatched it will dispatch `expectedActions
 
 ```js
 should(myActionCreator())
-  .dispatchActions({type: 'MY_ACTION_START'}, callback);
+  .dispatchActions({ type: 'MY_ACTION_START' }, callback);
 
 myActionCreator().should
-  .dispatchActions({type: 'MY_ACTION_START'}, callback);
+  .dispatchActions({ type: 'MY_ACTION_START' }, callback);
 ```
 
 #### .withState or with.state
@@ -289,18 +399,18 @@ Asserts that store initialised with `state` before `action` is dispatched.
 
 ```js
 should(myActionCreator())
-  .withState({property: 'value'})
-  .dispatchActions({type: 'MY_ACTION_START'}, callback);
+  .withState({ property: 'value' })
+  .dispatchActions({ type: 'MY_ACTION_START' }, callback);
 
 should(myActionCreator())
-  .with.state({property: 'value'})
-  .dispatchActions({type: 'MY_ACTION_START'}, callback);
+  .with.state({ property: 'value' })
+  .dispatchActions({ type: 'MY_ACTION_START' }, callback);
 
 myActionCreator().should
-  .withState({property: 'value'})
-  .dispatchActions({type: 'MY_ACTION_START'}, callback);
+  .withState({ property: 'value' })
+  .dispatchActions({ type: 'MY_ACTION_START' }, callback);
 
 myActionCreator().should
-  .with.state({property: 'value'})
-  .dispatchActions({type: 'MY_ACTION_START'}, callback);
+  .with.state({ property: 'value' })
+  .dispatchActions({ type: 'MY_ACTION_START' }, callback);
 ```
