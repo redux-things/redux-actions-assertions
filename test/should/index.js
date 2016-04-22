@@ -17,19 +17,19 @@ describe('should', () => {
 
     it('should accept function', (done) => {
       should(actions.actionCreatorWithGetState())
-        .withState(() => { return { property: 'value' };})
+        .withState(() => { return { property: 'value' }; })
         .dispatchActions(actions.actionWithGetState({ property: 'value' }), done);
     });
 
     it('should work with .should', (done) => {
       actions.actionCreatorWithGetState().should
-        .withState(() => { return { property: 'value' };})
+        .withState(() => { return { property: 'value' }; })
         .dispatchActions(actions.actionWithGetState({ property: 'value' }), done);
     });
 
     it('should have alias .state', (done) => {
       should(actions.actionCreatorWithGetState())
-        .with.state(() => { return { property: 'value' };})
+        .with.state(() => { return { property: 'value' }; })
         .dispatchActions(actions.actionWithGetState({ property: 'value' }), done);
     });
   });

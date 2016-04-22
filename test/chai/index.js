@@ -19,7 +19,7 @@ describe('chai', () => {
 
       it('should accept function', (done) => {
         expect(actions.actionCreatorWithGetState())
-          .with.state(() => { return { property: 'value' };})
+          .with.state(() => { return { property: 'value' }; })
           .to.dispatch.actions(actions.actionWithGetState({ property: 'value' }), done);
       });
     });
@@ -57,7 +57,7 @@ describe('chai', () => {
 
       it('should accept function', (done) => {
         actions.actionCreatorWithGetState().should
-          .with.state(() => { return { property: 'value' };})
+          .with.state(() => { return { property: 'value' }; })
           .dispatch.actions(actions.actionWithGetState({ property: 'value' }), done);
       });
     });
@@ -100,7 +100,7 @@ describe('chai', () => {
         assert.isDispatchingWithState(
           actions.actionCreatorWithGetState(),
           actions.actionWithGetState({ property: 'value' }),
-          () => { return { property: 'value' };},
+          () => { return { property: 'value' }; },
           done
         );
       });

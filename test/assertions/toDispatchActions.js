@@ -21,7 +21,7 @@ describe('assertions', () => {
       expect.restoreSpies();
     });
 
-    it('should be function', () => { expect(toDispatchActions).toBeA('function');});
+    it('should be function', () => { expect(toDispatchActions).toBeA('function'); });
 
     it('should call toDispatchActionsWithState with initialState', () => {
       toDispatchActions(actualAction, expectedAction, spyDone, spyFail);

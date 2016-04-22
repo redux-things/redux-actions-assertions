@@ -17,7 +17,7 @@ describe('expect.js', () => {
 
     it('should accept function', (done) => {
       expect(actions.actionCreatorWithGetState())
-        .withState(() => { return { property: 'value' };})
+        .withState(() => { return { property: 'value' }; })
         .to.dispatchActions(actions.actionWithGetState({ property: 'value' }), done);
     });
   });
