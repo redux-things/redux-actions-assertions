@@ -8,7 +8,7 @@ import {
 describe('assertions', () => {
   describe('action utils', () => {
     describe('getDispatchedActions', () => {
-      it('should be function', () => { expect(getDispatchedActions).toBeA('function');});
+      it('should be function', () => { expect(getDispatchedActions).toBeA('function'); });
 
       it('should return a Promise', () => {
         const result = getDispatchedActions({}, { type: '' });
@@ -32,7 +32,7 @@ describe('assertions', () => {
         };
       }
 
-      it('should be function', () => { expect(unrollActions).toBeA('function');});
+      it('should be function', () => { expect(unrollActions).toBeA('function'); });
 
       it('should return flat array with all actions', () => {
         unrollActions({}, asyncActionCreator()).then((result) => {
@@ -50,7 +50,7 @@ describe('assertions', () => {
     });
 
     describe('assertDispatchedActions', () => {
-      it('should be function', () => { expect(assertDispatchedActions).toBeA('function');});
+      it('should be function', () => { expect(assertDispatchedActions).toBeA('function'); });
 
       it('should throw error if expected action was not dispatched', () => {
         const dispatchedActions = [
@@ -62,8 +62,7 @@ describe('assertions', () => {
           { type: '10-0' }
         ];
 
-        expect(assertDispatchedActions)
-          .withArgs([dispatchedActions, expectedActions])
+        expect(() => { assertDispatchedActions(dispatchedActions, expectedActions); })
           .toThrow();
       });
     });

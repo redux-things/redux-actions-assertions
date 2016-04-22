@@ -14,20 +14,18 @@ describe('assertions', () => {
       expect.restoreSpies();
     });
 
-    it('should be function', () => { expect(toDispatchActionsWithState).toBeA('function');});
+    it('should be function', () => { expect(toDispatchActionsWithState).toBeA('function'); });
 
     describe('when "actualAction" is not a function or an object', () => {
       it('should throw Error', () => {
-        expect(toDispatchActionsWithState)
-          .withArgs(initialState, 'test', expectedAction, spyDone)
+        expect(() => { toDispatchActionsWithState(initialState, 'test', expectedAction, spyDone); })
           .toThrow();
       });
     });
 
     describe('when "expectedActions" not a function, not an object and not an array', () => {
       it('should throw Error', () => {
-        expect(toDispatchActionsWithState)
-          .withArgs([initialState, actualAction, 'test', spyDone])
+        expect(() => { toDispatchActionsWithState(initialState, actualAction, 'test', spyDone); })
           .toThrow();
       });
     });
