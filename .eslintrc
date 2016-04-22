@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb/base",
+  "extends": "airbnb-base",
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -17,6 +17,7 @@
     "new-cap": 0,
     "comma-dangle": [2, "never"],
     "spaced-comment": [2, "always", { exceptions: ["*", "-"] }],
-    "quote-props": [2, "consistent"]
+    "quote-props": [2, "consistent"],
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }]
   }
 }
