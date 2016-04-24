@@ -129,7 +129,7 @@ expect(actionA()).withState({ todos: [] }).toDispatch([
 
 Using [npm](https://www.npmjs.org/):
 
-    $ npm install --save redux-actions-assertions
+    $ npm install --save-dev redux-actions-assertions
 
 ### Redux middlewares registration
 
