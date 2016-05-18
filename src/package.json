@@ -1,6 +1,6 @@
 {
   "name": "redux-actions-assertions",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "Assertions for redux actions testing",
   "scripts": {
   },
@@ -26,9 +26,9 @@
     "asserts"
   ],
   "dependencies": {
-    "lodash.find": "^4.3.0",
+    "lodash.findindex": "^4.4.0",
     "lodash.flattendeep": "^4.2.0",
-    "redux": "^3.5.1",
+    "redux": "^3.5.2",
     "redux-mock-store": "^1.0.2"
   }
 }
