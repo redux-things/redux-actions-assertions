@@ -34,7 +34,7 @@ describe('assertions', () => {
 
       it('should be function', () => { expect(unrollActions).toBeA('function'); });
 
-      it('should return flat array with all actions', () => {
+      it('should return flat array with all the actions', () => {
         unrollActions({}, asyncActionCreator()).then((result) => {
           const expectedActions = [
             { type: '0-0' },
@@ -50,20 +50,62 @@ describe('assertions', () => {
     });
 
     describe('assertDispatchedActions', () => {
-      it('should be function', () => { expect(assertDispatchedActions).toBeA('function'); });
+      it('should be function', () => {
+        expect(assertDispatchedActions).toBeA('function');
+      });
 
-      it('should throw error if expected action was not dispatched', () => {
+      describe('when expected action was not dispatched', () => {
+        it('should throw an error', () => {
+          const dispatchedActions = [
+            { type: '0-0' },
+            { type: '0-1' }
+          ];
+          const expectedActions = [
+            { type: '0-0' },
+            { type: '10-0' }
+          ];
+
+          expect(() => { assertDispatchedActions(dispatchedActions, expectedActions); })
+            .toThrow();
+        });
+      });
+
+      it('should accept expected duplicate actions', () => {
         const dispatchedActions = [
           { type: '0-0' },
-          { type: '0-1' }
+          { type: '0-1' },
+          { type: '0-0' },
+          { type: '0-2' }
         ];
         const expectedActions = [
           { type: '0-0' },
-          { type: '10-0' }
+          { type: '0-0' },
+          { type: '0-1' },
+          { type: '0-2' }
         ];
 
         expect(() => { assertDispatchedActions(dispatchedActions, expectedActions); })
-          .toThrow();
+          .toNotThrow();
+      });
+
+      describe('when expected duplicate actions were not dispatched', () => {
+        it('should throw an error', () => {
+          const dispatchedActions = [
+            { type: '0-0' },
+            { type: '0-1' },
+            { type: '0-2' },
+            { type: '0-3' }
+          ];
+          const expectedActions = [
+            { type: '0-0' },
+            { type: '0-0' },
+            { type: '0-1' },
+            { type: '0-2' }
+          ];
+
+          expect(() => { assertDispatchedActions(dispatchedActions, expectedActions); })
+            .toThrow();
+        });
       });
     });
   });

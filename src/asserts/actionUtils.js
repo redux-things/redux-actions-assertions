@@ -1,4 +1,4 @@
-import find from 'lodash.find';
+import findIndex from 'lodash.findindex';
 import flattenDeep from 'lodash.flattendeep';
 import { toArray } from '../utils';
 import getMockStore from '../mockStore';
@@ -33,13 +33,24 @@ function unrollActions(initialState, expectedActions) {
   });
 }
 
+function notDispatchedError(dispatchedActions, expectedActions, expectedAction) {
+  return new Error(
+    `Expected action ${JSON.stringify(expectedAction)} was not dispatched.\n` +
+    `Expected dispatched actions: ${JSON.stringify(expectedActions)}` +
+    `Actual dispatched actions: ${JSON.stringify(dispatchedActions)}`
+  );
+}
+
 function assertDispatchedActions(dispatched, expected) {
-  for (let index = 0; index < expected.length; index++) {
-    if (!find(dispatched, expected[index])) {
-      throw new Error(
-        `Expected action ${JSON.stringify(expected[index])} was not dispatched.\n` +
-        `Actual dispatched actions: ${JSON.stringify(dispatched)}`
-      );
+  const availableActions = dispatched.slice();
+
+  for (let indexInExpected = 0; indexInExpected < expected.length; indexInExpected++) {
+    const indexInAvailable = findIndex(availableActions, expected[indexInExpected]);
+
+    if (indexInAvailable !== -1) {
+      availableActions.splice(indexInAvailable, 1);
+    } else {
+      throw notDispatchedError(dispatched, expected, expected[indexInExpected]);
     }
   }
 }
