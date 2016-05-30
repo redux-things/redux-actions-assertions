@@ -2,7 +2,7 @@
 Assertions for redux actions testing.
 
 This library adds assertions for [redux actions](http://redux.js.org/docs/advanced/AsyncActions.html) testing.  
-It use [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to mock redux store.
+It uses [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to mock redux store.
 
 [![build status](https://img.shields.io/travis/dmitry-zaets/redux-actions-assertions/master.svg?style=flat-square)](https://travis-ci.org/dmitry-zaets/redux-actions-assertions)
 [![npm version](https://img.shields.io/npm/v/redux-actions-assertions.svg?style=flat-square)](https://www.npmjs.com/package/redux-actions-assertions)
@@ -18,7 +18,7 @@ It use [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to m
 - [expect.js](#expectjs)
 - [should](#should)
 
-If you have not found assertion framework/library that you are using - you can use [pure javascript assertion](#javascript) or create an issue.
+If you have not found the assertion framework/library that you are using - you can use [pure javascript assertions](#javascript) or create an issue.
 
 ### Simplifies initial setup
 It provides singe-time global configuration for middlewares and initial store state.
