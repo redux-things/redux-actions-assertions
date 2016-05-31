@@ -68,14 +68,14 @@ expect(fetchData()).withState({/*custom state*/}).toDispatchActions(expectedActi
 ```
 
 ### Allows to avoid re-testing nested action creators
-It allows to test only actions that needs to be tested.
+It allows to test only actions that need to be tested.
 
 **Example:**  
 We have two actions (A, B). Each one makes async http requests.  
-Action A makes request and if result is successful it triggers Action B.  
-Action B is also used as independent action.  
+Action A makes a request and if the result is successful it triggers Action B.  
+Action B is also used as an independent action.  
 Action B can be tested separately.  
-We don't need to test it again in Action A.  
+Therefore, we don't need to test it again in Action A.  
 
 Actions:
 ```javascript
@@ -195,7 +195,7 @@ assertions.toDispatchActionsWithState(/**/);
 #### toDispatchActions
 > `toDispatchActions(action, expectedActions, callback)`
 
-Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
+Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be a plain object (action) or a function (action creator). `expectedActions` can be can be a plain object (action), a function (action creator), or an array of objects/functions.
 
 ```js
 toDispatchActions(testActionCreator(), [{ type: 'MY_ACTION_START' }], callback);
@@ -234,7 +234,7 @@ registerAssertions();
 
 > `assert.isDispatching(action, expectedActions, callback)`
 
-Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
+Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be a plain object (action) or a function (action creator). `expectedActions` can be can be a plain object (action), a function (action creator), or an array of objects/functions.
 
 ```js
 expect(myActionCreator())
@@ -296,7 +296,7 @@ registerAssertions();
 
 > `expect(action).toDispatchActions(expectedActions, callback)`
 
-Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
+Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be a plain object (action) or a function (action creator). `expectedActions` can be can be a plain object (action), a function (action creator), or an array of objects/functions.
 
 ```js
 expect(myActionCreator())
@@ -336,7 +336,7 @@ registerAssertions();
 
 > `expect(action).to.dispatchActions(expectedActions, callback)`
 
-Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
+Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be a plain object (action) or a function (action creator). `expectedActions` can be can be a plain object (action), a function (action creator), or an array of objects/functions.
 
 ```js
 expect(myActionCreator())
@@ -377,7 +377,7 @@ registerAssertions();
 > `should(action).dispatchActions(expectedActions, callback)`
 > `action.should.dispatchActions(expectedActions, callback)`
 
-Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be plain object (action) or function (action creator). `expectedActions` can be can be plain object (action) or function (action creator) or array of objects/functions.
+Asserts that when given `action` is dispatched it will dispatch `expectedActions`. `action` can be a plain object (action) or a function (action creator). `expectedActions` can be can be a plain object (action), a function (action creator), or an array of objects/functions.
 
 ```js
 should(myActionCreator())
