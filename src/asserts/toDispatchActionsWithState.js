@@ -4,7 +4,7 @@ import { getDispatchedActions, unrollActions, assertDispatchedActions } from './
 function toDispatchActionsWithState(initialState, actionUnderTest, expectedActions, done, fail) {
   if (!isFunction(actionUnderTest) && !isObject(actionUnderTest)) {
     throw new Error(
-      'The "actualAction" argument must be a function or object'
+      'The "actualAction" argument must be a function or an object'
     );
   }
 
@@ -13,7 +13,7 @@ function toDispatchActionsWithState(initialState, actionUnderTest, expectedActio
       !Array.isArray(expectedActions)) {
     throw new Error(
       'The "expectedActions" argument must be ' +
-      'an action creator function or an action object or an array of them'
+      'an action creator function, an action object, or an array of them'
     );
   }
 
