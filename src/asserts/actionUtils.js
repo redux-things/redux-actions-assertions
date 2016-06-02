@@ -36,7 +36,7 @@ function unrollActions(initialState, expectedActions) {
 function notDispatchedError(dispatchedActions, expectedActions, expectedAction) {
   return new Error(
     `Expected action ${JSON.stringify(expectedAction)} was not dispatched.\n` +
-    `Expected dispatched actions: ${JSON.stringify(expectedActions)}` +
+    `Expected dispatched actions: ${JSON.stringify(expectedActions)}\n` +
     `Actual dispatched actions: ${JSON.stringify(dispatchedActions)}`
   );
 }
