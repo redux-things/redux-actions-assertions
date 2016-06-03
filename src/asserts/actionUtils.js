@@ -41,6 +41,14 @@ function notDispatchedError(dispatchedActions, expectedActions, expectedAction) 
   );
 }
 
+function dispatchedError(dispatchedActions, unExpectedActions, unExpectedAction) {
+  return new Error(
+    `Expected action ${JSON.stringify(unExpectedAction)} was not dispatched.\n` +
+    `Expected dispatched actions: ${JSON.stringify(unExpectedActions)}\n` +
+    `Actual dispatched actions: ${JSON.stringify(dispatchedActions)}`
+  );
+}
+
 function assertDispatchedActions(dispatched, expected) {
   const availableActions = dispatched.slice();
 
@@ -55,8 +63,24 @@ function assertDispatchedActions(dispatched, expected) {
   }
 }
 
+function assertUnDispatchedActions(dispatched, unExpected) {
+  const availableActions = dispatched.slice();
+
+  for (let indexInExpected = 0; indexInExpected < unExpected.length; indexInExpected++) {
+    const indexInAvailable = findIndex(availableActions, unExpected[indexInExpected]);
+
+    if (indexInAvailable === -1) {
+      availableActions.splice(indexInAvailable, 1);
+    } else {
+      throw dispatchedError(dispatched, unExpected, unExpected[indexInExpected]);
+    }
+  }
+}
+
+
 export {
   getDispatchedActions,
   unrollActions,
-  assertDispatchedActions
+  assertDispatchedActions,
+  assertUnDispatchedActions
 };
