@@ -1,10 +1,12 @@
 import expect from 'expect';
-import * as actionUtils from '../../src/asserts/actionUtils';
-import { toDispatchActionsWithState } from '../../src/asserts/toDispatchActionsWithState';
-import getInitialStoreState from '../../src/initialState';
+import { getInitialStoreState } from '../../../src/initialState';
+import { performAssertion } from '../../../src/asserts/utils/performAssertion';
+import * as getDispatchedActionsObj from '../../../src/asserts/utils/getDispatchedActions';
+import * as unrollActionsObj from '../../../src/asserts/utils/unrollActions';
 
-describe('assertions', () => {
-  describe('toDispatchActionsWithState', () => {
+describe('assertion utils', () => {
+  describe('performAction', () => {
+    const testAssertFunction = expect.createSpy();
     const initialState = getInitialStoreState();
     const actualAction = { actualAction: 'actualAction' };
     const expectedAction = { expectedAction: 'expectedAction' };
@@ -14,19 +16,21 @@ describe('assertions', () => {
       expect.restoreSpies();
     });
 
-    it('should be function', () => { expect(toDispatchActionsWithState).toBeA('function'); });
+    it('should be function', () => { expect(performAssertion).toBeA('function'); });
 
-    describe('when "actualAction" is not a function or an object', () => {
+    describe('when "action" is not a function or an object', () => {
       it('should throw Error', () => {
-        expect(() => { toDispatchActionsWithState(initialState, 'test', expectedAction, spyDone); })
-          .toThrow();
+        expect(() => {
+          performAssertion(testAssertFunction, initialState, 'test', expectedAction, spyDone);
+        }).toThrow();
       });
     });
 
     describe('when "expectedActions" not a function, not an object and not an array', () => {
       it('should throw Error', () => {
-        expect(() => { toDispatchActionsWithState(initialState, actualAction, 'test', spyDone); })
-          .toThrow();
+        expect(() => {
+          performAssertion(testAssertFunction, initialState, actualAction, 'test', spyDone);
+        }).toThrow();
       });
     });
 
@@ -35,13 +39,13 @@ describe('assertions', () => {
       let unrollActionsSpy;
 
       beforeEach(() => {
-        getDispatchedActionsSpy = expect.spyOn(actionUtils, 'getDispatchedActions');
-        unrollActionsSpy = expect.spyOn(actionUtils, 'unrollActions');
+        getDispatchedActionsSpy = expect.spyOn(getDispatchedActionsObj, 'getDispatchedActions');
+        unrollActionsSpy = expect.spyOn(unrollActionsObj, 'unrollActions');
       });
 
       it('should call getDispatchedActions with initialState and action', () => {
         getDispatchedActionsSpy.andReturn(Promise.reject());
-        toDispatchActionsWithState(initialState, actualAction, [expectedAction], spyDone);
+        performAssertion(testAssertFunction, initialState, actualAction, [expectedAction], spyDone);
 
         expect(getDispatchedActionsSpy)
           .toHaveBeenCalledWith(initialState, actualAction);
@@ -53,43 +57,43 @@ describe('assertions', () => {
           getDispatchedActionsSpy.andReturn(Promise.reject(err));
         });
 
-        describe('when fail callback is passed', (done) => {
+        describe('when fail callback is spicified', (done) => {
           const spyFail = expect.createSpy();
 
           it('should call fail callback with rejection reason as argument', () => {
-            toDispatchActionsWithState(
+            performAssertion(
+              testAssertFunction,
               initialState,
               actualAction,
               expectedAction,
               spyDone,
               spyFail
             ).catch(() => {
-              expect(spyFail)
-                .toHaveBeenCalledWith(err);
+              expect(spyFail).toHaveBeenCalledWith(err);
               done();
             });
           });
         });
 
-        describe('when fail callback is not passed', (done) => {
+        describe('when fail callback is not spicified', (done) => {
           it('should call done callback with rejection reason as argument', () => {
-            toDispatchActionsWithState(
+            performAssertion(
+              testAssertFunction,
               initialState,
               actualAction,
               expectedAction,
               spyDone
             ).catch(() => {
-              expect(spyDone)
-                .toHaveBeenCalledWith(err);
+              expect(spyDone).toHaveBeenCalledWith(err);
               done();
             });
           });
         });
 
-        describe('when done callback is passed', (done) => {
+        describe('when done callback is spicified', (done) => {
           it('should throw Error with with rejection reason as json', () => {
             try {
-              toDispatchActionsWithState(initialState, actualAction, expectedAction);
+              performAssertion(testAssertFunction, initialState, actualAction, expectedAction);
             } catch (error) {
               expect(error).toBe(JSON.stringify(error));
               done();
@@ -105,14 +109,14 @@ describe('assertions', () => {
         });
 
         it('should call unrollActions with initialState and expectedActions', (done) => {
-          toDispatchActionsWithState(
+          performAssertion(
+            testAssertFunction,
             initialState,
             actualAction,
             expectedAction,
             spyDone
           ).then(() => {
-            expect(unrollActionsSpy)
-              .toHaveBeenCalledWith(initialState, expectedAction);
+            expect(unrollActionsSpy).toHaveBeenCalledWith(initialState, expectedAction);
 
             done();
           });
@@ -120,26 +124,34 @@ describe('assertions', () => {
 
         describe('when unrollActions rosolves', () => {
           const unrolledActions = [{ type: 'testAction' }];
-          let assertDispatchedActionsSpy;
 
           beforeEach(() => {
             unrollActionsSpy.andReturn(Promise.resolve(unrolledActions));
-            assertDispatchedActionsSpy = expect.spyOn(actionUtils, 'assertDispatchedActions');
           });
 
-          it('should call assertDispatchedActions with actual and expected actions', () => {
-            toDispatchActionsWithState(initialState, actualAction, expectedAction, spyDone)
-              .then(() => {
-                expect(assertDispatchedActionsSpy)
-                  .toHaveBeenCalledWith(dispatchedActions, unrolledActions);
-              });
+          it('should call assertionFunction with actual and expected actions', () => {
+            performAssertion(
+              testAssertFunction,
+              initialState,
+              actualAction,
+              expectedAction,
+              spyDone
+            ).then(() => {
+              expect(testAssertFunction)
+                .toHaveBeenCalledWith(dispatchedActions, unrolledActions);
+            });
           });
 
-          it('should call done callback if it passed', () => {
-            toDispatchActionsWithState(initialState, actualAction, expectedAction, spyDone)
-              .then(() => {
-                expect(spyDone).toHaveBeenCalled();
-              });
+          it('should call done callback if it spicified', () => {
+            performAssertion(
+              testAssertFunction,
+              initialState,
+              actualAction,
+              expectedAction,
+              spyDone
+            ).then(() => {
+              expect(spyDone).toHaveBeenCalled();
+            });
           });
         });
       });

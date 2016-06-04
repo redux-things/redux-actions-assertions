@@ -17,7 +17,6 @@ function getInitialStoreState() {
 
 export {
   buildInitialStoreState,
-  registerInitialStoreState
+  registerInitialStoreState,
+  getInitialStoreState
 };
-
-export default getInitialStoreState;
