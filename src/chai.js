@@ -18,9 +18,20 @@ function registerAssertions() {
 
       const state = utils.flag(this, 'state');
       if (state) {
+        if (utils.flag(this, 'negate')) {
+          return assertions.toNotDispatchActionsWithState(state, this._obj, expectedActions, done);
+        }
         return assertions.toDispatchActionsWithState(state, this._obj, expectedActions, done);
       }
+      if (utils.flag(this, 'negate')) {
+        return assertions.toNotDispatchActions(this._obj, expectedActions, done);
+      }
       return assertions.toDispatchActions(this._obj, expectedActions, done);
+    }
+
+    function isDispatching(actualAction, expectedActions, done) {
+      new _chai.Assertion(actualAction)
+        .to.dispatch.actions(expectedActions, done);
     }
 
     function isDispatchingWithState(actualAction, expectedActions, state, done) {
@@ -29,9 +40,15 @@ function registerAssertions() {
         .to.dispatch.actions(expectedActions, done);
     }
 
-    function isDispatching(actualAction, expectedActions, done) {
+    function isNotDispatching(actualAction, expectedActions, done) {
       new _chai.Assertion(actualAction)
-        .to.dispatch.actions(expectedActions, done);
+        .to.not.dispatch.actions(expectedActions, done);
+    }
+
+    function isNotDispatchingWithState(actualAction, expectedActions, state, done) {
+      new _chai.Assertion(actualAction)
+        .with.state(state)
+        .to.not.dispatch.actions(expectedActions, done);
     }
 
     _chai.Assertion.addChainableMethod('state', stateMethod);
@@ -39,6 +56,8 @@ function registerAssertions() {
     _chai.Assertion.addMethod('actions', dispatchActionsMethod);
     _chai.assert.isDispatching = isDispatching;
     _chai.assert.isDispatchingWithState = isDispatchingWithState;
+    _chai.assert.isNotDispatching = isNotDispatching;
+    _chai.assert.isNotDispatchingWithState = isNotDispatchingWithState;
   });
 }
 
