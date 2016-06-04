@@ -1,10 +1,10 @@
-import getInitialStoreState from '../initialState';
+import { getInitialStoreState } from '../initialState';
 import { toDispatchActionsWithState } from './toDispatchActionsWithState';
 
-function toDispatchActions(actionUnderTest, expectedActions, done, fail) {
+function toDispatchActions(action, expectedActions, done, fail) {
   return toDispatchActionsWithState(
     getInitialStoreState(),
-    actionUnderTest,
+    action,
     expectedActions,
     done, fail
   );

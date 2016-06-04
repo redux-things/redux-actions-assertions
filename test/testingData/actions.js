@@ -43,6 +43,37 @@ function parentAsyncActionCreator() {
   };
 }
 
+const anotherAsyncStart = () => { return { type: 'another-test-action-start' }; };
+const anotherAsyncFinish = () => { return { type: 'another-test-action-finish' }; };
+const anotherAsyncFail = () => { return { type: 'another-test-action-fail' }; };
+
+function anotherAsyncActionCreator() {
+  return dispatch => {
+    dispatch(anotherAsyncStart());
+    return asyncFunction().then(() => {
+      dispatch(anotherAsyncFinish());
+    }).catch(() => {
+      dispatch(anotherAsyncFail());
+    });
+  };
+}
+
+const anotherParentAsyncStart = () => { return { type: 'another-parent-test-action-start' }; };
+const anotherParentAsyncFinish = () => { return { type: 'another-parent-test-action-finish' }; };
+const anotherParentAsyncFail = () => { return { type: 'another-parent-test-action-fail' }; };
+
+function anotherParentAsyncActionCreator() {
+  return dispatch => {
+    dispatch(anotherParentAsyncStart());
+    return asyncFunction().then(() => {
+      dispatch(anotherAsyncActionCreator());
+      dispatch(anotherParentAsyncFinish());
+    }, () => {
+      dispatch(anotherParentAsyncFail());
+    });
+  };
+}
+
 const expectedActions = [
   start(),
   anotherStart(),
@@ -54,6 +85,19 @@ const expectedParentActions = [
   asyncActionCreator(),
   parentFinish()
 ];
+
+
+const anotherExpectedActions = [
+  anotherAsyncStart(),
+  anotherAsyncFinish()
+];
+
+const anotherParentExpectedActions = [
+  anotherParentAsyncStart(),
+  anotherAsyncActionCreator(),
+  anotherParentAsyncFail()
+];
+
 
 export default {
   start,
@@ -68,5 +112,9 @@ export default {
   parentFail,
   parentAsyncActionCreator,
   expectedActions,
-  expectedParentActions
+  expectedParentActions,
+  anotherAsyncActionCreator,
+  anotherParentAsyncActionCreator,
+  anotherExpectedActions,
+  anotherParentExpectedActions
 };

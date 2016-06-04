@@ -58,4 +58,29 @@ describe('should', () => {
         .dispatchActions(actions.expectedParentActions, done);
     });
   });
+
+  describe('.notDispatchActions', () => {
+    it('should accept single action', (done) => {
+      should(actions.start()).notDispatchActions(actions.anotherStart(), done);
+    });
+
+    it('should accept array with one action', (done) => {
+      should(actions.start()).notDispatchActions([actions.anotherStart()], done);
+    });
+
+    it('should accept array with multiple actions', (done) => {
+      should(actions.asyncActionCreator())
+        .notDispatchActions(actions.anotherExpectedActions, done);
+    });
+
+    it('should accept array with nested async action creators', (done) => {
+      should(actions.parentAsyncActionCreator())
+        .notDispatchActions(actions.anotherParentExpectedActions, done);
+    });
+
+    it('should work with .should', (done) => {
+      actions.parentAsyncActionCreator().should
+        .notDispatchActions(actions.anotherParentExpectedActions, done);
+    });
+  });
 });

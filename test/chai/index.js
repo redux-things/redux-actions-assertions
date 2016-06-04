@@ -45,6 +45,28 @@ describe('chai', () => {
           .to.dispatch.actions(actions.expectedParentActions, done);
       });
     });
+
+    describe('.not.dispatch.actions', () => {
+      it('should accept single action', (done) => {
+        expect(actions.start())
+          .to.not.dispatch.actions(actions.anotherStart(), done);
+      });
+
+      it('should accept array with one action', (done) => {
+        expect(actions.start())
+          .to.not.dispatch.actions([actions.anotherStart()], done);
+      });
+
+      it('should accept array with multiple actions', (done) => {
+        expect(actions.asyncActionCreator())
+          .to.not.dispatch.actions(actions.anotherExpectedActions, done);
+      });
+
+      it('should accept array with nested async action creators', (done) => {
+        expect(actions.parentAsyncActionCreator())
+          .to.not.dispatch.actions(actions.anotherParentExpectedActions, done);
+      });
+    });
   });
 
   describe('should', () => {
@@ -83,6 +105,28 @@ describe('chai', () => {
           .dispatch.actions(actions.expectedParentActions, done);
       });
     });
+
+    describe('.not.dispath.actions', () => {
+      it('should accept single action', (done) => {
+        actions.start().should
+          .not.dispatch.actions(actions.anotherStart(), done);
+      });
+
+      it('should accept array with one action', (done) => {
+        actions.start().should
+          .not.dispatch.actions([actions.anotherStart()], done);
+      });
+
+      it('should accept array with multiple actions', (done) => {
+        actions.asyncActionCreator().should
+          .not.dispatch.actions(actions.anotherExpectedActions, done);
+      });
+
+      it('should accept array with nested async action creators', (done) => {
+        actions.parentAsyncActionCreator().should
+          .not.dispatch.actions(actions.anotherParentExpectedActions, done);
+      });
+    });
   });
 
   describe('assert', () => {
@@ -100,6 +144,26 @@ describe('chai', () => {
         assert.isDispatchingWithState(
           actions.actionCreatorWithGetState(),
           actions.actionWithGetState({ property: 'value' }),
+          () => { return { property: 'value' }; },
+          done
+        );
+      });
+    });
+
+    describe('isNotDispatchingWithState', () => {
+      it('should accept object as third argument', (done) => {
+        assert.isNotDispatchingWithState(
+          actions.actionCreatorWithGetState(),
+          actions.actionWithGetState({ property: 'anotherParentAsyncActionCreator' }),
+          { property: 'value' },
+          done
+        );
+      });
+
+      it('should accept function as third argument', (done) => {
+        assert.isNotDispatchingWithState(
+          actions.actionCreatorWithGetState(),
+          actions.actionWithGetState({ property: 'anotherValue' }),
           () => { return { property: 'value' }; },
           done
         );
@@ -135,6 +199,40 @@ describe('chai', () => {
         assert.isDispatching(
           actions.parentAsyncActionCreator(),
           actions.expectedParentActions,
+          done
+        );
+      });
+    });
+
+    describe('isNotDispatching', () => {
+      it('should accept single action', (done) => {
+        assert.isNotDispatching(
+          actions.start(),
+          actions.anotherStart(),
+          done
+        );
+      });
+
+      it('should accept array with one action', (done) => {
+        assert.isNotDispatching(
+          actions.start(),
+          [actions.anotherStart()],
+          done
+        );
+      });
+
+      it('should accept array with multiple actions', (done) => {
+        assert.isNotDispatching(
+          actions.asyncActionCreator(),
+          actions.anotherExpectedActions,
+          done
+        );
+      });
+
+      it('should accept array with nested async action creators', (done) => {
+        assert.isNotDispatching(
+          actions.parentAsyncActionCreator(),
+          actions.anotherParentExpectedActions,
           done
         );
       });

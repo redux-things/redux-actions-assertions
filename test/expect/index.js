@@ -41,4 +41,24 @@ describe('expect', () => {
         .toDispatchActions(actions.expectedParentActions, done);
     });
   });
+
+  describe('.toNotDispatchActions', () => {
+    it('should accept single action', (done) => {
+      expect(actions.start()).toNotDispatchActions(actions.anotherStart(), done);
+    });
+
+    it('should accept array with one action', (done) => {
+      expect(actions.start()).toNotDispatchActions([actions.anotherStart()], done);
+    });
+
+    it('should accept array with multiple actions', (done) => {
+      expect(actions.asyncActionCreator())
+        .toNotDispatchActions(actions.anotherExpectedActions, done);
+    });
+
+    it('should accept array with nested async action creators', (done) => {
+      expect(actions.parentAsyncActionCreator())
+        .toNotDispatchActions(actions.anotherParentExpectedActions, done);
+    });
+  });
 });
