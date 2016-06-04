@@ -10,9 +10,17 @@ function dispatchActions(expectedActions, done) {
   if (this.obj instanceof ActionWithInitialState) {
     const action = this.obj.action;
     const state = this.obj.state;
-    assertions.toDispatchActionsWithState(state, action, expectedActions, done);
+    if (this.flags.not) {
+      assertions.toNotDispatchActionsWithState(state, action, expectedActions, done);
+    } else {
+      assertions.toDispatchActionsWithState(state, action, expectedActions, done);
+    }
   } else {
-    assertions.toDispatchActions(this.obj, expectedActions, done);
+    if (this.flags.not) {
+      assertions.toNotDispatchActions(this.obj, expectedActions, done);
+    } else {
+      assertions.toDispatchActions(this.obj, expectedActions, done);
+    }
   }
 }
 
