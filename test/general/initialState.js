@@ -1,7 +1,8 @@
 import expect from 'expect';
-import getInitialStoreState, {
+import {
   buildInitialStoreState,
-  registerInitialStoreState
+  registerInitialStoreState,
+  getInitialStoreState
 } from '../../src/initialState';
 import { expectedInitialState, reducerWithNesterReducers } from '../testingData/reducers';
 
