@@ -1,6 +1,6 @@
-## [expect.js](https://github.com/Automattic/expect.js)
+# [expect.js](https://github.com/Automattic/expect.js)
 
-### Registration
+## Registration
 
 ```js
 // using ES6 modules

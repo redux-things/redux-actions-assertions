@@ -1,0 +1,14 @@
+{
+  "links": {
+    "home": null,
+    "about": false,
+    "issues": "https://github.com/dmitry-zaets/redux-actions-assertions/issues",
+    "contribute": false,
+    "sharing": {
+      "google": false,
+      "facebook": false,
+      "twitter": false,
+      "website": false
+    }
+  }
+}
