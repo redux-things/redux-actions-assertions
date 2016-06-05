@@ -21,7 +21,7 @@ If you have not found assertion framework/library that you are using - please ad
 - [Reduces repetitive code of test methods](#reduces-repetitive-code-of-test-methods);
 - [Simplifies initial setup](#simplifies-initial-setup);
 
-### Allows to avoid re-testing nested action creators
+### Allows to avoid retesting nested action creators
 It allows to test only actions that need to be tested.
 
 **Example:**  
