@@ -1,4 +1,12 @@
 {
+  "title": "Redux Actions Assertions",
+  "description": "Assertions for redux actions testing. This library adds assertions for redux actions testing.",
+  "plugins": [ "ga" ],
+  "pluginsConfig": {
+    "ga": {
+      "token": "UA-78823490-1"
+    }
+  },
   "links": {
     "home": null,
     "about": false,
