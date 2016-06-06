@@ -1,0 +1,14 @@
+{
+  "name": "redux-actions-assertions-docs",
+  "version": "0.0.1",
+  "description": "Docs for redux-actions-assertions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gitbook-plugin-ga": "^1.0.1"
+  }
+}
