@@ -1,5 +1,5 @@
 import expect from 'expect';
-import assertions from './assertions';
+import { assertions } from 'redux-actions-assertions-js';
 
 function withState(state) {
   this.state = state;
