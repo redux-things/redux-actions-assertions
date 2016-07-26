@@ -1,8 +1,5 @@
-import { registerMiddlewares } from './mockStore';
-import { registerInitialStoreState, buildInitialStoreState } from './initialState';
-
-export {
-  registerMiddlewares,
+export { registerMiddlewares,
   registerInitialStoreState,
-  buildInitialStoreState
-};
+  buildInitialStoreState,
+  assertions
+} from 'redux-actions-assertions-js';

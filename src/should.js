@@ -1,5 +1,5 @@
 import should from 'should';
-import assertions from './assertions';
+import { assertions } from 'redux-actions-assertions-js';
 import ActionWithInitialState from './actionWithInitialState';
 
 function withState(state) {

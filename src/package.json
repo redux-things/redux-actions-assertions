@@ -26,9 +26,6 @@
     "asserts"
   ],
   "dependencies": {
-    "lodash.findindex": "^4.4.0",
-    "lodash.flattendeep": "^4.2.0",
-    "redux": "^3.5.2",
-    "redux-mock-store": "^1.0.2"
+    "redux-actions-assertions-js": "^0.0.1"
   }
 }
