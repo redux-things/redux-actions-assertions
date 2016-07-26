@@ -40,6 +40,6 @@
     "should": "^8.3.2"
   },
   "dependencies": {
-    "redux-actions-assertions-js": "^0.0.1"
+    "redux-actions-assertions-js": "^1.0.0"
   }
 }
