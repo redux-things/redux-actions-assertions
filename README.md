@@ -8,11 +8,11 @@ It use [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to m
 [![npm version](https://img.shields.io/npm/v/redux-actions-assertions.svg?style=flat-square)](https://www.npmjs.com/package/redux-actions-assertions)
 
 ## Supported Assertion Frameworks/Libraries:
-- [chai](http://dmitry.js.org/redux-actions-assertions/chai.html)
-- [expect](http://dmitry.js.org/redux-actions-assertions/expect.html)
-- [expect.js](http://dmitry.js.org/redux-actions-assertions/expectjs.html)
-- [should](http://dmitry.js.org/redux-actions-assertions/should.html)
-- [pure javascript assertion](http://dmitry.js.org/redux-actions-assertions/javascript.html)
+- [chai](https://redux-things.github.io/redux-actions-assertions/chai.html)
+- [expect](https://redux-things.github.io/redux-actions-assertions/expect.html)
+- [expect.js](https://redux-things.github.io/redux-actions-assertions/expectjs.html)
+- [should](https://redux-things.github.io/redux-actions-assertions/should.html)
+- [pure javascript assertion](https://redux-things.github.io/redux-actions-assertions/javascript.html)
 
 If you have not found assertion framework/library that you are using - please add comment into [this issue](https://github.com/dmitry-zaets/redux-actions-assertions/issues/3).
 

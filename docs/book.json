@@ -10,7 +10,7 @@
   "links": {
     "home": null,
     "about": false,
-    "issues": "https://github.com/dmitry-zaets/redux-actions-assertions/issues",
+    "issues": "https://github.com/redux-things/redux-actions-assertions/issues",
     "contribute": false,
     "sharing": {
       "google": false,
