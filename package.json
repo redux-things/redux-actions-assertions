@@ -3,11 +3,12 @@
   "description": "Assertions for redux actions testing",
   "scripts": {
     "lint": "eslint src test",
+    "test:index": "mocha --compilers js:babel-register --reporter spec test/*.js",
     "test:chai": "mocha --compilers js:babel-register --reporter spec test/chai/*.js",
     "test:expect": "mocha --compilers js:babel-register --reporter spec test/expect/*.js",
     "test:expectjs": "mocha --compilers js:babel-register --reporter spec test/expectjs/*.js",
     "test:should": "mocha --compilers js:babel-register --reporter spec test/should/*.js",
-    "test": "npm run test:chai && npm run test:expect && npm run test:expectjs && npm run test:should",
+    "test": "npm run test:index && npm run test:chai && npm run test:expect && npm run test:expectjs && npm run test:should",
     "prepublish": "rimraf build && babel src --out-dir build --copy-files"
   },
   "repository": {
@@ -40,6 +41,6 @@
     "should": "^8.3.2"
   },
   "dependencies": {
-    "redux-actions-assertions-js": "^1.0.0"
+    "redux-actions-assertions-js": "^1.1.0"
   }
 }
