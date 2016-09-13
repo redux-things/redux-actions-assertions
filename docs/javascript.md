@@ -2,14 +2,12 @@
 
 ## Registration
 
-For plain javascript assertions you don't need to register anything. Just import assertions in your tests:
-
 ```js
 // using ES6 modules
 import { assertions } from 'redux-actions-assertions';
 
 // using CommonJS modules
-var assertions = require('redux-actions-assertions');
+var assertions = require('redux-actions-assertions').assertions;
 
 // in test
 assertions.toDispatchActions(/**/)
@@ -17,6 +15,8 @@ assertions.toNotDispatchActions(/**/)
 assertions.toDispatchActionsWithState(/**/);
 assertions.toNotDispatchActionsWithState(/**/);
 ```
+
+For plain javascript assertions you don't need to register anything. Just import assertions in your tests:
 
 ## Usage
 
