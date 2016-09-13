@@ -6,7 +6,7 @@ For plain javascript assertions you don't need to register anything. Just import
 
 ```js
 // using ES6 modules
-import assertions from 'redux-actions-assertions';
+import { assertions } from 'redux-actions-assertions';
 
 // using CommonJS modules
 var assertions = require('redux-actions-assertions');
