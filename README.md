@@ -12,6 +12,7 @@ It use [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) to m
 - [expect](https://redux-things.github.io/redux-actions-assertions/expect.html)
 - [expect.js](https://redux-things.github.io/redux-actions-assertions/expectjs.html)
 - [should](https://redux-things.github.io/redux-actions-assertions/should.html)
+- [tape](https://redux-things.github.io/redux-actions-assertions/tape.html)
 - [pure javascript assertion](https://redux-things.github.io/redux-actions-assertions/javascript.html)
 
 If you have not found assertion framework/library that you are using - please add comment into [this issue](https://github.com/dmitry-zaets/redux-actions-assertions/issues/3).
