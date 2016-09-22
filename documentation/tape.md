@@ -4,11 +4,11 @@
 
 ```js
 // using ES6 modules
-import test from 'tape'
-import { assertions } from 'redux-actions-assertions'
+import test from 'tape';
+import { assertions } from 'redux-actions-assertions';
 
 // using CommonJS modules
-var test = require('tape')
+var test = require('tape');
 var assertions = require('redux-actions-assertions').assertions;
 ```
 
@@ -24,13 +24,13 @@ Asserts that when given `action` is dispatched it will dispatch `expectedActions
 test('Thunk: editTag', (t) => {
   t.plan(1)
   toDispatchActions(testActionCreator(), [{ type: 'MY_ACTION_START' }], t.pass, t.fail);
-})
+});
 
 // Using `t.end`
 test('Thunk: editTag', (t) => {
   toDispatchActions(testActionCreator(), [{ type: 'MY_ACTION_START' }], t.pass, t.fail)
     .then(t.end);
-})
+});
 ```
 
 ### toNotDispatchActions
@@ -40,9 +40,9 @@ Asserts that when given `action` is dispatched it will not dispatch `expectedAct
 
 ```js
 test('Thunk: editTag', (t) => {
-  t.plan(1)
+  t.plan(1);
   toNotDispatchActions(testActionCreator(), [{ type: 'MY_ACTION_START' }], t.pass, t.fail);
-})
+});
 ```
 
 ### toDispatchActionsWithState
@@ -53,9 +53,9 @@ Same as `toDispatchActions` + asserts that store initialised with `state` before
 
 ```js
 test('Thunk: editTag', (t) => {
-  t.plan(1)
+  t.plan(1);
   toDispatchActions({property: 'value'}, testActionCreator(), [{ type: 'MY_ACTION_START' }], t.pass, t.fail);
-})
+});
 ```
 
 ### toNotDispatchActionsWithState
@@ -66,7 +66,7 @@ Same as `toNotDispatchActions` + asserts that store initialised with `state` bef
 
 ```js
 test('Thunk: editTag', (t) => {
-  t.plan(1)
+  t.plan(1);
   toNotDispatchActions({property: 'value'}, testActionCreator(), [{ type: 'MY_ACTION_START' }], t.pass, t.fail);
-})
+});
 ```

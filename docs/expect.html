@@ -1,0 +1,332 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>expect | Redux Actions Assertions</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.6.7">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="./expectjs.html" />
+    
+    
+    <link rel="prev" href="./chai.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book"
+        data-level="3.2"
+        data-chapter-title="expect"
+        data-filepath="expect.md"
+        data-basepath="."
+        data-revision="Thu Sep 22 2016 18:44:55 GMT+0200 (CEST)"
+        data-innerlanguage="">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="./index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="what_it_does.html">
+            
+                
+                    <a href="./what_it_does.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        What it does
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="installation.html">
+            
+                
+                    <a href="./installation.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        Installation
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="javascript.html">
+            
+                
+                    <a href="./javascript.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        API Reference
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1" data-path="chai.html">
+            
+                
+                    <a href="./chai.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.1.</b>
+                        
+                        chai
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="3.2" data-path="expect.html">
+            
+                
+                    <a href="./expect.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.2.</b>
+                        
+                        expect
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="expectjs.html">
+            
+                
+                    <a href="./expectjs.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.3.</b>
+                        
+                        expect.js
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="should.html">
+            
+                
+                    <a href="./should.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.4.</b>
+                        
+                        should
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="tape.html">
+            
+                
+                    <a href="./tape.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.5.</b>
+                        
+                        tape
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="./" >Redux Actions Assertions</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="expect"><a href="https://github.com/mjackson/expect" target="_blank">expect</a></h1>
+<h2 id="registration">Registration</h2>
+<pre><code class="lang-js"><span class="hljs-comment">// using ES6 modules</span>
+<span class="hljs-keyword">import</span> { registerAssertions } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;redux-actions-assertions/expect&apos;</span>;
+
+<span class="hljs-comment">// using CommonJS modules</span>
+<span class="hljs-keyword">var</span> registerAssertions = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;redux-actions-assertions/expect&apos;</span>).registerAssertions;
+
+<span class="hljs-comment">// registration</span>
+registerAssertions();
+</code></pre>
+<h2 id="usage">Usage</h2>
+<h3 id="todispatchactions">.toDispatchActions</h3>
+<blockquote>
+<p><code>expect(action).toDispatchActions(expectedActions, callback)</code></p>
+</blockquote>
+<p>Asserts that when given <code>action</code> is dispatched it will dispatch <code>expectedActions</code>. <code>action</code> can be plain object (action) or function (action creator). <code>expectedActions</code> can be can be plain object (action) or function (action creator) or array of objects/functions.</p>
+<pre><code class="lang-js">expect(myActionCreator())
+  .toDispatchActions({ type: <span class="hljs-string">&apos;MY_ACTION_START&apos;</span> }, callback);
+</code></pre>
+<h3 id="tonotdispatchactions">.toNotDispatchActions</h3>
+<blockquote>
+<p><code>expect(action).toNotDispatchActions(expectedActions, callback)</code></p>
+</blockquote>
+<p>Asserts that when given <code>action</code> is dispatched it will not dispatch <code>expectedActions</code>. <code>action</code> can be plain object (action) or function (action creator). <code>expectedActions</code> can be can be plain object (action) or function (action creator) or array of objects/functions.</p>
+<pre><code class="lang-js">expect(myActionCreator())
+  .toNotDispatchActions({ type: <span class="hljs-string">&apos;MY_ACTION_START&apos;</span> }, callback);
+</code></pre>
+<h3 id="withstate">.withState</h3>
+<blockquote>
+<p><code>expect(action).withState(state).toDispatchActions(expectedActions, callback)</code></p>
+</blockquote>
+<p>Asserts that store initialised with <code>state</code> before <code>action</code> is dispatched.</p>
+<pre><code class="lang-js">expect(myActionCreator())
+  .withState({property: <span class="hljs-string">&apos;value&apos;</span>})
+  .toDispatchActions([{ type: <span class="hljs-string">&apos;MY_ACTION_START&apos;</span> }, finishActionCreator()], callback);
+</code></pre>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="./chai.html" class="navigation navigation-prev " aria-label="Previous page: chai"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="./expectjs.html" class="navigation navigation-next " aria-label="Next page: expect.js"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-ga/plugin.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"ga":{"token":"UA-78823490-1","configuration":"auto"},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"],"website":false},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

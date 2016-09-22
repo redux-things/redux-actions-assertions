@@ -9,4 +9,5 @@
   * [expect](expect.md)
   * [expect.js](expectjs.md)
   * [should](should.md)
+  * [tape](tape.md)
 
