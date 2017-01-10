@@ -1,0 +1,9 @@
+{
+  "spec_dir": "test/jasmine",
+  "spec_files": [
+    "*.js"
+  ],
+  "helpers": [
+    "../../node_modules/babel-register/lib/node.js"
+  ]
+}
