@@ -6,8 +6,9 @@ import actions from '../testingData/actions';
 
 registerMiddlewares([thunk]);
 
+beforeEach(registerAssertions);
+
 describe('jasmine', () => {
-  beforeEach(() => { registerAssertions(); });
   describe('toDispatchActionsWithState', () => {
     it('should accept object', (done) => {
       const state = { property: 'value' };
