@@ -1,41 +1,49 @@
 /* eslint-env jasmine */
 import { assertions } from 'redux-actions-assertions-js';
 
-const toDispatchActions = () => {
+function toDispatchActions() {
   return {
     compare(action, expectedActions, done) {
       assertions.toDispatchActions(action, expectedActions, done, done.fail);
       return { pass: true };
+    },
+    negativeCompare(action, expectedActions, done) {
+      assertions.toNotDispatchActions(action, expectedActions, done, done.fail);
+      return { pass: true };
     }
   };
-};
+}
 
-const toNotDispatchActions = () => {
+function toNotDispatchActions() {
   return {
     compare(action, expectedActions, done) {
       assertions.toNotDispatchActions(action, expectedActions, done, done.fail);
       return { pass: true };
     }
   };
-};
+}
 
-const toDispatchActionsWithState = () => {
+function toDispatchActionsWithState() {
   return {
     compare(action, state, expectedActions, done) {
       assertions.toDispatchActionsWithState(state, action, expectedActions, done, done.fail);
       return { pass: true };
+    },
+    negativeCompare(action, state, expectedActions, done) {
+      assertions.toNotDispatchActionsWithState(state, action, expectedActions, done, done.fail);
+      return { pass: true };
     }
   };
-};
+}
 
-const toNotDispatchActionsWithState = () => {
+function toNotDispatchActionsWithState() {
   return {
     compare(action, state, expectedActions, done) {
       assertions.toNotDispatchActionsWithState(state, action, expectedActions, done, done.fail);
       return { pass: true };
     }
   };
-};
+}
 
 const matchers = {
   toDispatchActions,
@@ -44,9 +52,9 @@ const matchers = {
   toNotDispatchActionsWithState
 };
 
-const registerAssertions = () => {
+function registerAssertions() {
   jasmine.addMatchers(matchers);
-};
+}
 
 export {
   registerAssertions,
