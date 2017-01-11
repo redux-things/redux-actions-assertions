@@ -55,4 +55,24 @@ describe('jasmine', () => {
         .toNotDispatchActions(actions.anotherParentExpectedActions, done);
     });
   });
+
+  describe('.not.toDispatchActions', () => {
+    it('should accept single action', (done) => {
+      expect(actions.start()).not.toDispatchActions(actions.anotherStart(), done);
+    });
+
+    it('should accept array with one action', (done) => {
+      expect(actions.start()).not.toDispatchActions([actions.anotherStart()], done);
+    });
+
+    it('should accept array with multiple actions', (done) => {
+      expect(actions.asyncActionCreator())
+        .not.toDispatchActions(actions.anotherExpectedActions, done);
+    });
+
+    it('should accept array with nested async action creators', (done) => {
+      expect(actions.parentAsyncActionCreator())
+        .not.toDispatchActions(actions.anotherParentExpectedActions, done);
+    });
+  });
 });
