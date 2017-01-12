@@ -7,9 +7,10 @@
     "test:chai": "mocha --compilers js:babel-register --reporter spec test/chai/*.js",
     "test:expect": "mocha --compilers js:babel-register --reporter spec test/expect/*.js",
     "test:expectjs": "mocha --compilers js:babel-register --reporter spec test/expectjs/*.js",
+    "test:jasmine": "jasmine JASMINE_CONFIG_PATH=test/jasmine/jasmine.json",
     "test:should": "mocha --compilers js:babel-register --reporter spec test/should/*.js",
     "test:tape": "tape --require babel-register test/tape/*.js",
-    "test": "npm run test:index && npm run test:chai && npm run test:expect && npm run test:expectjs && npm run test:should && npm run test:tape",
+    "test": "npm run test:index && npm run test:chai && npm run test:expect && npm run test:expectjs && npm run test:jasmine && npm run test:should && npm run test:tape",
     "prepublish": "rimraf build && babel src --out-dir build --copy-files"
   },
   "repository": {
@@ -36,6 +37,7 @@
     "eslint-plugin-import": "^1.8.0",
     "expect": "^1.20.1",
     "expect.js": "^0.3.1",
+    "jasmine": "^2.5.2",
     "mocha": "^2.4.5",
     "redux-thunk": "^2.1.0",
     "rimraf": "^2.5.2",
