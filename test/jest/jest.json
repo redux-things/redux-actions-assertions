@@ -1,0 +1,5 @@
+{
+  "testPathDirs": ["<rootDir>/test/jest"],
+  "testRegex": "index.js",
+  "setupTestFrameworkScriptFile": "<rootDir>/test/jest/setupFramework.js"
+}
