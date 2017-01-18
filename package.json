@@ -12,7 +12,9 @@
     "test:should": "mocha --compilers js:babel-register --reporter spec test/should/*.js",
     "test:tape": "tape --require babel-register test/tape/*.js",
     "test": "npm run test:index && npm run test:chai && npm run test:expect && npm run test:expectjs && npm run test:jasmine && npm run test:jest && npm run test:should && npm run test:tape",
-    "prepublish": "rimraf build && babel src --out-dir build --copy-files"
+    "copy-resources": "cp {README.md,LICENSE} ./build",
+    "build": "rimraf build && babel src --out-dir build --copy-files ",
+    "prepublish": "npm run build && npm run copy-resources"
   },
   "repository": {
     "type": "git",
