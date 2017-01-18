@@ -14,7 +14,8 @@
     "test": "npm run test:index && npm run test:chai && npm run test:expect && npm run test:expectjs && npm run test:jasmine && npm run test:jest && npm run test:should && npm run test:tape",
     "copy-resources": "cp {README.md,LICENSE} ./build",
     "build": "rimraf build && babel src --out-dir build --copy-files ",
-    "prepublish": "npm run build && npm run copy-resources"
+    "prepublish": "npm run build && npm run copy-resources",
+    "docs:build": "cd documentation && npm run build"
   },
   "repository": {
     "type": "git",
