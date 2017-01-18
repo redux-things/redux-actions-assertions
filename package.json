@@ -24,9 +24,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dmitry-zaets/redux-actions-assertions/issues"
+    "url": "https://github.com/redux-things/redux-actions-assertions/issues"
   },
-  "homepage": "https://github.com/dmitry-zaets/redux-actions-assertions#readme",
+  "homepage": "https://github.com/redux-things/redux-actions-assertions#readme",
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
