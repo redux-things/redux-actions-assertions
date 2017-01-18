@@ -57,6 +57,5 @@ function registerAssertions() {
 }
 
 export {
-  registerAssertions,
-  matchers
+  registerAssertions
 };
