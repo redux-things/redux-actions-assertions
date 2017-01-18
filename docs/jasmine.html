@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>expect.js | Redux Actions Assertions</title>
+        <title>jasmine | Redux Actions Assertions</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.7">
@@ -37,10 +37,10 @@
         
     
     
-    <link rel="next" href="./jasmine.html" />
+    <link rel="next" href="./jest.html" />
     
     
-    <link rel="prev" href="./expect.html" />
+    <link rel="prev" href="./expectjs.html" />
     
 
         
@@ -49,9 +49,9 @@
         
         
     <div class="book"
-        data-level="3.3"
-        data-chapter-title="expect.js"
-        data-filepath="expectjs.md"
+        data-level="3.4"
+        data-chapter-title="jasmine"
+        data-filepath="jasmine.md"
         data-basepath="."
         data-revision="Wed Jan 18 2017 12:57:27 GMT+0100 (CET)"
         data-innerlanguage="">
@@ -158,7 +158,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.3" data-path="expectjs.html">
+        <li class="chapter " data-level="3.3" data-path="expectjs.html">
             
                 
                     <a href="./expectjs.html">
@@ -173,7 +173,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.4" data-path="jasmine.html">
+        <li class="chapter active" data-level="3.4" data-path="jasmine.html">
             
                 
                     <a href="./jasmine.html">
@@ -271,46 +271,47 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="expectjs"><a href="https://github.com/Automattic/expect.js" target="_blank">expect.js</a></h1>
+                        <h1 id="jasmine"><a href="https://github.com/jasmine/jasmine" target="_blank">jasmine</a></h1>
 <h2 id="registration">Registration</h2>
 <pre><code class="lang-js"><span class="hljs-comment">// using ES6 modules</span>
-<span class="hljs-keyword">import</span> { registerAssertions } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;redux-actions-assertions/expectjs&apos;</span>;
+<span class="hljs-keyword">import</span> { registerAssertions } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;redux-actions-assertions/jasmine&apos;</span>;
 
 <span class="hljs-comment">// using CommonJS modules</span>
-<span class="hljs-keyword">var</span> registerAssertions = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;redux-actions-assertions/expectjs&apos;</span>).registerAssertions;
+<span class="hljs-keyword">var</span> registerAssertions = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;redux-actions-assertions/jasmine&apos;</span>).registerAssertions;
 
 <span class="hljs-comment">// registration</span>
-registerAssertions();
+beforeEach(registerAssertions);
 </code></pre>
 <h2 id="usage">Usage</h2>
-<h3 id="dispatchactions">.dispatchActions</h3>
+<h3 id="todispatchactions">.toDispatchActions</h3>
 <blockquote>
-<p><code>expect(action).to.dispatchActions(expectedActions, callback)</code></p>
+<p><code>expect(action).toDispatchActions(expectedActions, done)</code></p>
 </blockquote>
 <p>Asserts that when given <code>action</code> is dispatched it will dispatch <code>expectedActions</code>. <code>action</code> can be plain object (action) or function (action creator). <code>expectedActions</code> can be can be plain object (action) or function (action creator) or array of objects/functions.</p>
 <pre><code class="lang-js">expect(myActionCreator())
-  .to.dispatchActions({ type: <span class="hljs-string">&apos;MY_ACTION_START&apos;</span> }, callback);
+  .toDispatchActions({ type: <span class="hljs-string">&apos;MY_ACTION_START&apos;</span> }, done);
 </code></pre>
-<h3 id="notdispatchactions">.not.dispatchActions</h3>
+<h3 id="nottodispatchactions">.not.toDispatchActions</h3>
 <blockquote>
-<p><code>expect(action).not.to.dispatchActions(expectedActions, callback)</code>
-<code>expect(action).to.not.dispatchActions(expectedActions, callback)</code></p>
+<p><code>expect(action).not.toDispatchActions(expectedActions, done)</code></p>
 </blockquote>
 <p>Asserts that when given <code>action</code> is dispatched it will not dispatch <code>expectedActions</code>. <code>action</code> can be plain object (action) or function (action creator). <code>expectedActions</code> can be can be plain object (action) or function (action creator) or array of objects/functions.</p>
 <pre><code class="lang-js">expect(myActionCreator())
-  .not.to.dispatchActions({ type: <span class="hljs-string">&apos;MY_ACTION_START&apos;</span> }, callback);
-
-expect(myActionCreator())
-  .to.not.dispatchActions({ type: <span class="hljs-string">&apos;MY_ACTION_START&apos;</span> }, callback);
+  .not.toDispatchActions({ type: <span class="hljs-string">&apos;MY_ACTION_START&apos;</span> }, done);
 </code></pre>
-<h3 id="withstate">.withState</h3>
+<h3 id="todispatchactionswithstate">.toDispatchActionsWithState</h3>
 <blockquote>
-<p><code>expect(action).withState(state).to.dispatchActions(expectedActions, callback)</code></p>
+<p><code>expect(action).toDispatchActionsWithState(state, expectedActions, done)</code></p>
 </blockquote>
 <p>Asserts that store initialised with <code>state</code> before <code>action</code> is dispatched.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> state = {property: <span class="hljs-string">&apos;value&apos;</span>};
+<span class="hljs-keyword">const</span> expectedActions = [{ type: <span class="hljs-string">&apos;MY_ACTION_START&apos;</span> }, finishActionCreator()];
+expect(myActionCreator())
+  .toDispatchActionsWithState(state, expectedActions, done);
+</code></pre>
+<p>You can also use it with <code>.not</code>:</p>
 <pre><code class="lang-js">expect(myActionCreator())
-  .withState({ property: <span class="hljs-string">&apos;value&apos;</span> })
-  .to.dispatchActions([{ type: <span class="hljs-string">&apos;MY_ACTION_START&apos;</span> }, finishActionCreator()], callback);
+  .not.toDispatchActionsWithState(state, expectedActions, done);
 </code></pre>
 
                     
@@ -322,10 +323,10 @@ expect(myActionCreator())
         </div>
 
         
-        <a href="./expect.html" class="navigation navigation-prev " aria-label="Previous page: expect"><i class="fa fa-angle-left"></i></a>
+        <a href="./expectjs.html" class="navigation navigation-prev " aria-label="Previous page: expect.js"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./jasmine.html" class="navigation navigation-next " aria-label="Next page: jasmine"><i class="fa fa-angle-right"></i></a>
+        <a href="./jest.html" class="navigation navigation-next " aria-label="Next page: jest"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
